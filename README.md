@@ -1,6 +1,6 @@
 # react-js-progressbar
 
-![](https://github.com/alabsi91/react-js-toast/blob/readme/toasts.png)
+![](https://github.com/alabsi91/react-js-progressbar/blob/readme/1.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/2.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/3.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/4.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/5.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/6.gif)
 
 - React library to help developers to draw animated, cross-browser, highly customizable progress circles using SVG.
 

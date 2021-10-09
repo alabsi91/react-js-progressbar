@@ -1,0 +1,35 @@
+{
+  "name": "react-js-progressbar",
+  "version": "1.0.0",
+  "description": "React library to help developers to draw animated, cross-browser, highly customizable progress circles using SVG.",
+  "main": "react-js-progressbar.js",
+  "scripts": {
+    "publish": "npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alabsi91/react-js-progressbar.git"
+  },
+  "dependencies": {
+    "request-animation-number": "^1.0.6"
+  },
+  "keywords": [
+    "react",
+    "react",
+    "js",
+    "progressbar",
+    "progress",
+    "circle",
+    "circular",
+    "animation",
+    "svg",
+    "component"
+  ],
+  "author": "Ahmed Alabsi",
+  "license": "ISC",
+  "types": "./react-js-progressbar.d.ts",
+  "bugs": {
+    "url": "https://github.com/alabsi91/react-js-progressbar/issues"
+  },
+  "homepage": "https://github.com/alabsi91/react-js-progressbar#readme"
+}
