@@ -1,8 +1,15 @@
 # react-js-progressbar
 
-![](https://github.com/alabsi91/react-js-progressbar/blob/readme/1.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/2.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/3.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/4.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/5.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/6.gif)
+<br />
+
+![npm](https://img.shields.io/npm/v/react-js-progressbar)
+![npm bundle size](https://img.shields.io/bundlephobia/min/react-js-progressbar)
+![NPM](https://img.shields.io/npm/l/react-js-progressbar)
 
 - React library to help developers to draw animated, cross-browser, highly customizable progress circles using SVG.
+
+![](https://github.com/alabsi91/react-js-progressbar/blob/readme/1.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/2.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/3.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/4.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/5.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/6.gif)
+
 
 ## Installation
 
@@ -129,14 +136,14 @@ export default function App() {
 
 - Align progressbar text on the x , y axis.
 
-- x : _[Number | String] [optional]_
+- **x** : _[Number | String] [optional]_
 
   - Align progressbar text on the x axis.
   - **Default Value** '50%'
 
 <br />
 
-- y : _[Number | String] [optional]_
+- **y** : _[Number | String] [optional]_
 
   - Align progressbar text on the y axis.
   - **Default Value** '50%'
@@ -157,19 +164,19 @@ export default function App() {
 
 - Progressbar animation options.
 
-- duration : _[Number] [optional]_
+- **duration** : _[Number] [optional]_
   - Progressbar animation duration in ms.
   - **Default Value** 500
 
 <br />
 
-- delay : _[Number] [optional]_
+- **delay** : _[Number] [optional]_
   - Progressbar animation delay in ms.
   - **Default Value** 0
 
 <br />
 
-- ease : _[String | Function] [optional]_
+- **ease** : _[String | Function] [optional]_
   - Progressbar animation transition timing function.
   - Easing functions specify the rate of change of the number over time.
   - Easing functions specify the rate of change of the number over time.
@@ -180,13 +187,13 @@ export default function App() {
 
 <br />
 
-- animateOnMount : _[Boolean] [optional]_
+- **animateOnMount** : _[Boolean] [optional]_
   - Animate on first render.
   - **Default Value** true
 
 <br />
 
-- animateOnInputChange : _[Boolean] [optional]_
+- **animateOnInputChange** : _[Boolean] [optional]_
   - Animate every time input value changes.
   - **Default Value** true
 
