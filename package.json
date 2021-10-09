@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/alabsi91/react-js-progressbar.git"
   },
+  "dependencies": {
+    "request-animation-number": "^1.0.6"
+  },
   "keywords": [
     "react",
     "react",
