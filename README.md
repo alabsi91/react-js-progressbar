@@ -10,7 +10,6 @@
 
 ![](https://github.com/alabsi91/react-js-progressbar/blob/readme/1.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/2.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/3.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/4.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/5.gif)![](https://github.com/alabsi91/react-js-progressbar/blob/readme/6.gif)
 
-
 ## Installation
 
 `npm install react-js-progressbar`
@@ -135,24 +134,18 @@ export default function App() {
 ### textPosition : _[Object] [optional]_
 
 - Align progressbar text on the x , y axis.
+- **Default Value** `{x: '50%', y: '50%}`
 
-- **x** : _[Number | String] [optional]_
-
-  - Align progressbar text on the x axis.
-  - **Default Value** '50%'
-
-<br />
-
-- **y** : _[Number | String] [optional]_
-
-  - Align progressbar text on the y axis.
-  - **Default Value** '50%'
+| Option |              Description              | Default Value |
+| :----: | :-----------------------------------: | :-----------: |
+|  `x`   | Align progressbar text on the x axis. |     '50%'     |
+|  `y`   | Align progressbar text on the y axis. |     '50%'     |
 
 ### textStyle : _[Object] [optional]_
 
 - Progressbar middle text css inline style.
 - Note: use `fill` for text color.
-- **Default Value** `{ fontSize: '40px', fill: 'black' }`
+- **Default Values** `{ fontSize: '40px', fill: 'black' }`
 
 ### animateText : _[Boolean] [optional]_
 
@@ -163,38 +156,12 @@ export default function App() {
 ### animation : _[Object] [optional]_
 
 - Progressbar animation options.
+- **Default Values** `{ duration: 500, delay: 0, ease: 'easeOutBack', animateOnMount: true, animateOnInputChange: true }`
 
-- **duration** : _[Number] [optional]_
-  - Progressbar animation duration in ms.
-  - **Default Value** 500
-
-<br />
-
-- **delay** : _[Number] [optional]_
-  - Progressbar animation delay in ms.
-  - **Default Value** 0
-
-<br />
-
-- **ease** : _[String | Function] [optional]_
-  - Progressbar animation transition timing function.
-  - Easing functions specify the rate of change of the number over time.
-  - Easing functions specify the rate of change of the number over time.
-  - Avaliable Easing functions :
-  `"linear", "easeInSine", "easeOutSine", "easeInOutSine", "easeInQuad", "easeOutQuad", "easeInOutQuad", "easeInCubic", "easeOutCubic", "easeInOutCubic", "easeInQuart", "easeOutQuart", "easeInOutQuart", "easeInQuint", "easeOutQuint", "easeInOutQuint", "easeInExpo", "easeOutExpo", "easeInOutExpo", "easeInCirc", "easeOutCirc", "easeInOutCirc", "easeInBack", "easeOutBack", "easeInOutBack", "easeInElastic", "easeOutElastic", "easeInOutElastic", "easeInBounce", "easeOutBounce", "easeInOutBounce"`
-  - If you want to provide your own timing-function make sure that the function takes one parameter and returns one value.
-  - **Default Value** 'easeOutBack'
-
-<br />
-
-- **animateOnMount** : _[Boolean] [optional]_
-  - Animate on first render.
-  - **Default Value** true
-
-<br />
-
-- **animateOnInputChange** : _[Boolean] [optional]_
-  - Animate every time input value changes.
-  - **Default Value** true
-
-<br />
+| Option                 | Type               | Description | Default Value |
+| ---------------------- | ------------------ | ----------- | ------------- |
+| `animateOnMount`       | Boolean            | Animate on first render. | true          |
+| `animateOnInputChange` | Boolean            | Animate every time input value changes. | true          |
+| `duration`             | Number             | Progressbar animation duration in ms. | 500 |
+| `delay`                | Number             | Progressbar animation delay in ms. | 0 |
+| `ease`                 | String \| Function | Progressbar animation transition timing function. <br /> Easing functions specify the rate of change of the number over time. <br /> Avaliable Easing functions `"linear", "easeInSine", "easeOutSine", "easeInOutSine", "easeInQuad", "easeOutQuad", "easeInOutQuad", "easeInCubic", "easeOutCubic", "easeInOutCubic", "easeInQuart", "easeOutQuart", "easeInOutQuart", "easeInQuint", "easeOutQuint", "easeInOutQuint", "easeInExpo", "easeOutExpo", "easeInOutExpo", "easeInCirc", "easeOutCirc", "easeInOutCirc", "easeInBack", "easeOutBack", "easeInOutBack", "easeInElastic", "easeOutElastic", "easeInOutElastic", "easeInBounce", "easeOutBounce", "easeInOutBounce"`. <br /> If you want to provide your own timing-function make sure that the function takes one parameter and returns one value. | 'easeOutBack' |
