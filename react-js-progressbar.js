@@ -30,7 +30,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function Progressbar(props) {
-  var _props$size, _props$clockwise, _props$dashed, _props$dashesCount, _props$dashesGap, _props$pathWidth, _props$trailWidth, _props$customText, _props$textPosition$x, _props$textPosition, _props$textPosition$y, _props$textPosition2, _props$animateText, _props$animation$dura, _props$animation, _props$animation$dela, _props$animation2, _props$animation3, _strokeShadow$split;
+  var _props$size, _props$clockwise, _props$dashed, _props$dashesSize, _props$dashesGap, _props$pathWidth, _props$trailWidth, _props$customText, _props$textPosition$x, _props$textPosition, _props$textPosition$y, _props$textPosition2, _props$animateText, _props$animation$dura, _props$animation, _props$animation$dela, _props$animation2, _props$animation3, _strokeShadow$split;
 
   const pathRef = (0, _react.useRef)();
   const textRef = (0, _react.useRef)();
@@ -45,7 +45,7 @@ function Progressbar(props) {
   const size = (_props$size = props.size) !== null && _props$size !== void 0 ? _props$size : '100%';
   const clockwise = (_props$clockwise = props.clockwise) !== null && _props$clockwise !== void 0 ? _props$clockwise : true;
   const dashed = (_props$dashed = props.dashed) !== null && _props$dashed !== void 0 ? _props$dashed : false;
-  const dashesCount = (_props$dashesCount = props.dashesCount) !== null && _props$dashesCount !== void 0 ? _props$dashesCount : 15;
+  const dashesSize = (_props$dashesSize = props.dashesSize) !== null && _props$dashesSize !== void 0 ? _props$dashesSize : 15;
   const dashesGap = (_props$dashesGap = props.dashesGap) !== null && _props$dashesGap !== void 0 ? _props$dashesGap : 2;
   const strokeWidth = (_props$pathWidth = props.pathWidth) !== null && _props$pathWidth !== void 0 ? _props$pathWidth : 12;
   const strokeColor = props.pathColor || ['#f4314a', '#fa5813'];
@@ -161,7 +161,7 @@ function Progressbar(props) {
       d: "M170.063 171.353C188.54 153.208 200 127.942 200 100C200 44.7715 155.228 0 100 0C44.7715 0 0 44.7715 0 100C0 127.942 11.4604 153.208 29.9371 171.353",
       stroke: "white",
       strokeWidth: strokeWidth + 'px',
-      strokeDasharray: "".concat(dashesCount, "px ").concat(dashesGap, "px")
+      strokeDasharray: "".concat(dashesSize, "px ").concat(dashesGap, "px")
     })) : null, props.customText === '' ? null : /*#__PURE__*/_react.default.createElement("text", {
       ref: textRef,
       x: textPosition.x,
@@ -238,7 +238,7 @@ function Progressbar(props) {
       d: "M199.999 100C200 99.83 200 99.66 200 99.4898C200 44.5431 155.228 0 100 0C44.7715 0 0 44.5431 0 99.4898C0 99.66 0.000429398 99.83 0.00128722 100",
       stroke: "white",
       strokeWidth: strokeWidth + 'px',
-      strokeDasharray: "".concat(dashesCount, "px ").concat(dashesGap, "px")
+      strokeDasharray: "".concat(dashesSize, "px ").concat(dashesGap, "px")
     })) : null, props.customText === '' ? null : /*#__PURE__*/_react.default.createElement("text", {
       ref: textRef,
       x: textPosition.x,
@@ -322,7 +322,7 @@ function Progressbar(props) {
       r: R,
       stroke: "white",
       strokeWidth: strokeWidth + 'px',
-      strokeDasharray: "".concat(dashesCount, "px ").concat(dashesGap, "px")
+      strokeDasharray: "".concat(dashesSize, "px ").concat(dashesGap, "px")
     })) : null, props.customText === '' ? null : /*#__PURE__*/_react.default.createElement("text", {
       ref: textRef,
       x: textPosition.x,
