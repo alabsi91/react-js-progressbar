@@ -258,10 +258,10 @@ interface ProgressbarProps {
     dashed?: Boolean
 
     /**
-     * - How many dashes inside progressbar filling path .
+     * - Progressbar filling path dashes size and length.
      * - **Default Value** 15
      */
-    dashesCount?: Number
+    dashesSize?: Number
 
     /**
      * The space between dashes.

@@ -18,7 +18,7 @@ export default function Progressbar(props) {
   const clockwise = props.clockwise ?? true;
 
   const dashed = props.dashed ?? false;
-  const dashesCount = props.dashesCount ?? 15;
+  const dashesSize = props.dashesSize ?? 15;
   const dashesGap = props.dashesGap ?? 2;
 
   const strokeWidth = props.pathWidth ?? 12;
@@ -149,7 +149,7 @@ export default function Progressbar(props) {
               d='M170.063 171.353C188.54 153.208 200 127.942 200 100C200 44.7715 155.228 0 100 0C44.7715 0 0 44.7715 0 100C0 127.942 11.4604 153.208 29.9371 171.353'
               stroke='white'
               strokeWidth={strokeWidth + 'px'}
-              strokeDasharray={`${dashesCount}px ${dashesGap}px`}
+              strokeDasharray={`${dashesSize}px ${dashesGap}px`}
             />
           </mask>
         ) : null}
@@ -245,7 +245,7 @@ export default function Progressbar(props) {
               d='M199.999 100C200 99.83 200 99.66 200 99.4898C200 44.5431 155.228 0 100 0C44.7715 0 0 44.5431 0 99.4898C0 99.66 0.000429398 99.83 0.00128722 100'
               stroke='white'
               strokeWidth={strokeWidth + 'px'}
-              strokeDasharray={`${dashesCount}px ${dashesGap}px`}
+              strokeDasharray={`${dashesSize}px ${dashesGap}px`}
             />
           </mask>
         ) : null}
@@ -345,7 +345,7 @@ export default function Progressbar(props) {
               r={R}
               stroke='white'
               strokeWidth={strokeWidth + 'px'}
-              strokeDasharray={`${dashesCount}px ${dashesGap}px`}
+              strokeDasharray={`${dashesSize}px ${dashesGap}px`}
             />
           </mask>
         ) : null}

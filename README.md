@@ -96,9 +96,9 @@ export default function App() {
 - Enable progressbar filling path dashed style (mask).
 - **Default Value** false
 
-### dashesCount : _[Number] [optional]_
+### dashesSize : _[Number] [optional]_
 
-- How many dashes inside progressbar filling path.
+- Progressbar filling path dashes size and length.
 - **Default Value** 15
 
 ### dashesGap : _[Number] [optional]_
