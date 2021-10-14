@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { requestNum } from 'request-animation-number';
 
 export default function Progressbar(props) {
@@ -87,7 +87,7 @@ export default function Progressbar(props) {
 
   const [isFirstMount, setIsFirstMount] = useState(true);
 
-  const SemiCircle = () => {
+  const SemiCircle = useCallback(() => {
     const translateY = trailWidth > strokeWidth ? trailWidth + trailShadowBlur : strokeWidth + pathShadowBlur;
     const textShift = trailWidth > strokeWidth ? trailWidth / 2 + trailShadowBlur / 2 : strokeWidth / 2 + pathShadowBlur / 2;
 
@@ -183,9 +183,10 @@ export default function Progressbar(props) {
         ) : null}
       </svg>
     );
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.children]);
 
-  const Arc = () => {
+  const Arc = useCallback(() => {
     const textShift = trailWidth > strokeWidth ? trailWidth / 2 + trailShadowBlur / 2 : strokeWidth / 2 + pathShadowBlur / 2;
     const translateY = trailWidth > strokeWidth ? trailWidth + trailShadowBlur : strokeWidth + pathShadowBlur;
     const hs = strokeWidth / 2;
@@ -279,9 +280,10 @@ export default function Progressbar(props) {
         ) : null}
       </svg>
     );
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.children]);
 
-  const FullCircle = () => {
+  const FullCircle = useCallback(() => {
     const textShift = trailWidth > strokeWidth ? trailWidth / 2 + trailShadowBlur / 2 : strokeWidth / 2 + pathShadowBlur / 2;
 
     return (
@@ -379,7 +381,8 @@ export default function Progressbar(props) {
         ) : null}
       </svg>
     );
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.children]);
 
   useEffect(() => {
     // exit if animate on mount disabled.
