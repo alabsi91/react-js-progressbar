@@ -99,8 +99,7 @@ function Progressbar(props) {
   };
 
   const [isFirstMount, setIsFirstMount] = (0, _react.useState)(true);
-
-  const SemiCircle = () => {
+  const SemiCircle = (0, _react.useCallback)(() => {
     const translateY = trailWidth > strokeWidth ? trailWidth + trailShadowBlur : strokeWidth + pathShadowBlur;
     const textShift = trailWidth > strokeWidth ? trailWidth / 2 + trailShadowBlur / 2 : strokeWidth / 2 + pathShadowBlur / 2;
     return /*#__PURE__*/_react.default.createElement("svg", {
@@ -176,10 +175,9 @@ function Progressbar(props) {
       y: trailWidth > strokeWidth ? trailWidth / 2 : strokeWidth / 2,
       width: "100%",
       height: "100%"
-    }, props.children) : null);
-  };
-
-  const Arc = () => {
+    }, props.children) : null); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.children]);
+  const Arc = (0, _react.useCallback)(() => {
     const textShift = trailWidth > strokeWidth ? trailWidth / 2 + trailShadowBlur / 2 : strokeWidth / 2 + pathShadowBlur / 2;
     const translateY = trailWidth > strokeWidth ? trailWidth + trailShadowBlur : strokeWidth + pathShadowBlur;
     const hs = strokeWidth / 2;
@@ -253,10 +251,9 @@ function Progressbar(props) {
       y: trailWidth > strokeWidth ? trailWidth / 2 : strokeWidth / 2,
       width: "100%",
       height: "100%"
-    }, props.children) : null);
-  };
-
-  const FullCircle = () => {
+    }, props.children) : null); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.children]);
+  const FullCircle = (0, _react.useCallback)(() => {
     const textShift = trailWidth > strokeWidth ? trailWidth / 2 + trailShadowBlur / 2 : strokeWidth / 2 + pathShadowBlur / 2;
     return /*#__PURE__*/_react.default.createElement("svg", {
       width: size,
@@ -337,9 +334,8 @@ function Progressbar(props) {
       y: trailWidth > strokeWidth ? trailWidth / 2 + trailShadowBlur / 2 : strokeWidth / 2 + pathShadowBlur / 2,
       width: "100%",
       height: "100%"
-    }, props.children) : null);
-  };
-
+    }, props.children) : null); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.children]);
   (0, _react.useEffect)(() => {
     // exit if animate on mount disabled.
     if (isFirstMount && !animation.animateOnMount) {
