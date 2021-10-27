@@ -16,7 +16,7 @@
 
 ## Usage
 
-```javascript
+```jsx
 //...
 import Progressbar from 'react-js-progressbar';
 
@@ -38,7 +38,7 @@ export default function App() {
           trailColor='#363636' // use a string for solid color.
           textStyle={{ fill: 'red' }} // middle text style
         >
-          // children here, an image for example. (optional)
+          // children goes here, an image for example. (optional)
         </Progressbar>
       </div>
     </>
@@ -50,38 +50,38 @@ export default function App() {
 
 ### input : _[Number]_
 
-- Progressbar percentage a value between 0 and 100.
+- Progressbar percentage a value between `0` and `100`.
 
-### shape : _['semi circle' | 'full circle' | 'arc'] [optional]_
+### shape : _[ 'semi circle' | 'full circle' | 'arc' ] [optional]_
 
 - Progressbar shape style.
-- **Default Value** 'full circle'
+- **Default Value** `full circle`
 
-### size : _[Number | String] [optional]_
+### size : _[ Number | String ] [optional]_
 
-- Progressbar size (width \* height) in pixels.
-- **Default Value** '100%'
+- Progressbar size (width \* height).
+- **Default Value** `100%`
 
 ### clockwise : _[Boolean] [optional]_
 
 - Whether to rotate progressbar in clockwise direction.
-- **Default Value** true
+- **Default Value** `true`
 
 ### pathWidth : _[Number] [optional]_
 
 - Progressbar filling path width (stroke width).
-- **Default Value** 12
+- **Default Value** `12`
 
 ### pathColor : _[ String | String[] ] [optional]_
 
 - Progressbar filling path color (stroke color).
 - Accepts one string for a solid color or array of two strings for gradient color.
-- **Default Value** ['#f4314a', '#fa5813']
+- **Default Value** `['#f4314a', '#fa5813']`
 
-### pathLinecap : _['butt' | 'round' | 'square' | 'none'] [optional]_
+### pathLinecap : _[ 'butt' | 'round' | 'square' | 'none' ] [optional]_
 
 - Progressbar filling path line cap shape.
-- **Default Value** 'round'
+- **Default Value** `round`
 
 ### pathShadow : _[String] [optional]_
 
@@ -89,47 +89,47 @@ export default function App() {
 - **Syntax** `"offset-x offset-y blur-radius color"`
 - Doesn't works for `'arc'` shape and when `dashed` is enabled.
 - Use `'none'` to remove the shadow.
-- **Default Value** '0px 0px 8px #00000080'
+- **Default Value** `0px 0px 8px #00000080`
 
 ### dashed : _[Boolean] [optional]_
 
 - Enable progressbar filling path dashed style (mask).
-- **Default Value** false
+- **Default Value** `false`
 
 ### dashesSize : _[Number] [optional]_
 
 - Progressbar filling path dashes size and length.
-- **Default Value** 15
+- **Default Value** `15`
 
 ### dashesGap : _[Number] [optional]_
 
 - The space between dashes.
-- **Default Value** 2
+- **Default Value** `2`
 
 ### trailWidth : _[Number] [optional]_
 
 - Progressbar path trail width (stroke width).
-- **Default Value** 5
+- **Default Value** `5`
 
 ### trailColor : _[ String | String[] ] [optional]_
 
 - Progressbar path trail color (stroke color).
 - Accepts one string for a solid color or array of two strings for gradient color.
 - Use `'none'` to remove the trail.
-- **Default Value** 'lightgray'
+- **Default Value** `lightgray`
 
 ### backgroundColor : _[ String | String[] ] [optional]_
 
 - Progressbar circle background color.
 - Accepts one string for a solid color or array of two strings for gradient color.
 - Use `'none'` to remove the background.
-- **Default Value** 'none'
+- **Default Value** `none`
 
 ### customText : _[String] [optional]_
 
 - Progressbar middle custom text.
 - Use `""` (empty string) to remove the text.
-- **Default Value** input + '%'
+- **Default Value** `input + '%'`
 
 ### textPosition : _[Object] [optional]_
 
@@ -151,7 +151,7 @@ export default function App() {
 
 - Animate progressbar middle text from 0 to `input value`.
 - Doesn't work if `customText` value is given.
-- **Default Value** true
+- **Default Value** `true`
 
 ### animation : _[Object] [optional]_
 
