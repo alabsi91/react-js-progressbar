@@ -30,7 +30,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function Progressbar(props) {
-  var _props$size, _props$clockwise, _props$dashed, _props$dashesSize, _props$dashesGap, _props$pathWidth, _props$trailWidth, _props$customText, _props$textPosition$x, _props$textPosition, _props$textPosition$y, _props$textPosition2, _props$animateText, _props$animation$dura, _props$animation, _props$animation$dela, _props$animation2, _props$animation3, _strokeShadow$split;
+  var _props$size, _props$clockwise, _props$dashed, _props$dashesSize, _props$dashesGap, _props$pathWidth, _props$trailWidth, _props$customText, _props$textPosition$x, _props$textPosition, _props$textPosition$y, _props$textPosition2, _props$animateText, _props$animation$dura, _props$animation, _props$animation$dela, _props$animation2, _props$animation3, _props$animateOnMount, _props$animateOnInput, _strokeShadow$split;
 
   const pathRef = (0, _react.useRef)();
   const textRef = (0, _react.useRef)();
@@ -39,7 +39,6 @@ function Progressbar(props) {
   const [svgId] = (0, _react.useState)(Math.random() * 1000);
   let input = props.input;
   input = Math.min(Math.max(input, 0), 100);
-  if (!input && isNaN(input)) console.error('react-js-ProgressBar: Please enter a valid input value');
   const type = props.shape || 'full circle'; // 'semi circle' | 'full circle' | 'arc'
 
   const size = (_props$size = props.size) !== null && _props$size !== void 0 ? _props$size : '100%';
@@ -56,9 +55,11 @@ function Progressbar(props) {
   const trailColor = props.trailColor || 'lightgray';
   const backgroundColor = props.backgroundColor || 'none';
   const textValue = (_props$customText = props.customText) !== null && _props$customText !== void 0 ? _props$customText : (oldTextValue ? oldTextValue.toFixed(0) : input.toFixed(0)) + '%';
+  const textPositionX = (_props$textPosition$x = (_props$textPosition = props.textPosition) === null || _props$textPosition === void 0 ? void 0 : _props$textPosition.x) !== null && _props$textPosition$x !== void 0 ? _props$textPosition$x : '50%';
+  const textPositionY = (_props$textPosition$y = (_props$textPosition2 = props.textPosition) === null || _props$textPosition2 === void 0 ? void 0 : _props$textPosition2.y) !== null && _props$textPosition$y !== void 0 ? _props$textPosition$y : type === 'arc' ? '40%' : '50%';
   const textPosition = {
-    x: (_props$textPosition$x = (_props$textPosition = props.textPosition) === null || _props$textPosition === void 0 ? void 0 : _props$textPosition.x) !== null && _props$textPosition$x !== void 0 ? _props$textPosition$x : '50%',
-    y: (_props$textPosition$y = (_props$textPosition2 = props.textPosition) === null || _props$textPosition2 === void 0 ? void 0 : _props$textPosition2.y) !== null && _props$textPosition$y !== void 0 ? _props$textPosition$y : type === 'arc' ? '40%' : '50%'
+    x: textPositionX,
+    y: textPositionY
   };
 
   const textStyle = _objectSpread({
@@ -67,13 +68,48 @@ function Progressbar(props) {
   }, props.textStyle);
 
   const animateText = (_props$animateText = props.animateText) !== null && _props$animateText !== void 0 ? _props$animateText : true;
+  const animationDuration = (_props$animation$dura = (_props$animation = props.animation) === null || _props$animation === void 0 ? void 0 : _props$animation.duration) !== null && _props$animation$dura !== void 0 ? _props$animation$dura : 500;
+  const animationDelay = (_props$animation$dela = (_props$animation2 = props.animation) === null || _props$animation2 === void 0 ? void 0 : _props$animation2.delay) !== null && _props$animation$dela !== void 0 ? _props$animation$dela : 0;
+  const animationEase = ((_props$animation3 = props.animation) === null || _props$animation3 === void 0 ? void 0 : _props$animation3.ease) || 'easeOutBack';
+  const animateOnMount = (_props$animateOnMount = props.animateOnMount) !== null && _props$animateOnMount !== void 0 ? _props$animateOnMount : true;
+  const animateOnInputChange = (_props$animateOnInput = props.animateOnInputChange) !== null && _props$animateOnInput !== void 0 ? _props$animateOnInput : true;
   const animation = {
-    duration: (_props$animation$dura = (_props$animation = props.animation) === null || _props$animation === void 0 ? void 0 : _props$animation.duration) !== null && _props$animation$dura !== void 0 ? _props$animation$dura : 500,
-    delay: (_props$animation$dela = (_props$animation2 = props.animation) === null || _props$animation2 === void 0 ? void 0 : _props$animation2.delay) !== null && _props$animation$dela !== void 0 ? _props$animation$dela : 0,
-    ease: ((_props$animation3 = props.animation) === null || _props$animation3 === void 0 ? void 0 : _props$animation3.ease) || 'easeOutBack',
-    animateOnMount: true,
-    animateOnInputChange: true
+    duration: animationDuration,
+    delay: animationDelay,
+    ease: animationEase,
+    animateOnMount,
+    animateOnInputChange
   };
+
+  const checkTypes = () => {
+    if (typeof input !== 'number' || input < 0) console.error('react-js-ProgressBar: props.input has invalid value.');
+    if (!new Set(['full circle', 'semi circle', 'full circle', 'arc']).has(type)) console.error('react-js-ProgressBar: props.shape has invalid value.');
+    if (typeof size !== 'number' && typeof size !== 'string') console.error('react-js-ProgressBar: props.size has invalid value.');
+    if (typeof clockwise !== 'boolean') console.error('react-js-ProgressBar: props.clockwise has invalid value.');
+    if (typeof dashed !== 'boolean') console.error('react-js-ProgressBar: props.dashed has invalid value.');
+    if (typeof dashesSize !== 'number' || dashesSize < 0) console.error('react-js-ProgressBar: props.dashesSize has invalid value.');
+    if (typeof dashesGap !== 'number' || dashesGap < 0) console.error('react-js-ProgressBar: props.dashesGap has invalid value.');
+    if (typeof strokeWidth !== 'number' || strokeWidth < 0) console.error('react-js-ProgressBar: props.pathWidth has invalid value.');
+    if (typeof strokeColor !== 'string' && typeof strokeColor !== 'object') console.error('react-js-ProgressBar: props.pathColor has invalid value.');
+    if (!new Set(['butt', 'round', 'square', 'none']).has(strokeLinecap)) console.error('react-js-ProgressBar: props.pathLinecap has invalid value.');
+    if (typeof strokeShadow !== 'string') console.error('react-js-ProgressBar: props.pathShadow has invalid value.');
+    if (typeof trailWidth !== 'number' || trailWidth < 0) console.error('react-js-ProgressBar: props.trailWidth has invalid value.');
+    if (typeof trailColor !== 'string') console.error('react-js-ProgressBar: props.trailColor has invalid value.');
+    if (typeof backgroundColor !== 'string' && typeof backgroundColor !== 'object') console.error('react-js-ProgressBar: props.backgroundColor has invalid value.');
+    if (typeof textPositionX !== 'number' && typeof textPositionX !== 'string') console.error('react-js-ProgressBar: props.textPosition.x has invalid value.');
+    if (typeof textPositionY !== 'number' && typeof textPositionY !== 'string') console.error('react-js-ProgressBar: props.textPosition.y has invalid value.');
+    if (typeof textPosition !== 'object') console.error('react-js-ProgressBar: props.textPosition has invalid value.');
+    if (typeof textStyle !== 'object') console.error('react-js-ProgressBar: props.textStyle has invalid value.');
+    if (typeof animateText !== 'boolean') console.error('react-js-ProgressBar: props.animateText has invalid value.');
+    if (typeof animationDuration !== 'number' || animationDuration < 0) console.error('react-js-ProgressBar: props.animation.duration has invalid value.');
+    if (typeof animationDelay !== 'number' || animationDelay < 0) console.error('react-js-ProgressBar: props.animation.delay has invalid value.');
+    if (!new Set(['linear', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce']).has(animationEase) && typeof animationEase === 'string' || typeof animationEase !== 'string' && typeof animationEase !== 'function') console.error('react-js-ProgressBar: props.animation.ease has invalid value.');
+    if (typeof animateOnMount !== 'boolean') console.error('react-js-ProgressBar: props.animation.animateOnMount has invalid value.');
+    if (typeof animateOnInputChange !== 'boolean') console.error('react-js-ProgressBar: props.animation.animateOnInputChange has invalid value.');
+    if (typeof animation !== 'object') console.error('react-js-ProgressBar: props.animation has invalid value.');
+  };
+
+  checkTypes();
   const R = 100;
   const circumference = type === 'full circle' ? 2 * Math.PI * R : type === 'arc' ? 2 * Math.PI * 100 / 2 : type === 'semi circle' ? 2 * Math.PI * R / 1.329 : 0;
   const calcProgress = (circumference - input * circumference / 100) * (clockwise ? 1 : -1);
