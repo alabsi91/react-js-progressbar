@@ -1,9 +1,14 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import { requestNum } from 'request-animation-number';
 
 export default function Progressbar(props) {
   const pathRef = useRef();
+  const pathGradiantRef = useRef();
   const textRef = useRef();
+  const trailRef = useRef();
+  const trailGradiantRef = useRef();
+  const backgroundColorRef = useRef();
+  const backgroundColorGradiantRef = useRef();
 
   const [oldProgressValue, setoldProgressValue] = useState(null);
   const [oldTextValue, setoldTextValue] = useState(null);
@@ -91,7 +96,8 @@ export default function Progressbar(props) {
     if (typeof trailWidth !== 'number' || trailWidth < 0)
       console.error('react-js-ProgressBar: props.trailWidth has invalid value.');
 
-    if (typeof trailColor !== 'string') console.error('react-js-ProgressBar: props.trailColor has invalid value.');
+    if (typeof trailColor !== 'string' && typeof trailColor !== 'object')
+      console.error('react-js-ProgressBar: props.trailColor has invalid value.');
 
     if (typeof backgroundColor !== 'string' && typeof backgroundColor !== 'object')
       console.error('react-js-ProgressBar: props.backgroundColor has invalid value.');
@@ -161,7 +167,7 @@ export default function Progressbar(props) {
 
     if (typeof animation !== 'object') console.error('react-js-ProgressBar: props.animation has invalid value.');
   };
-  checkTypes();
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') checkTypes();
 
   const R = 100;
   const circumference =
@@ -189,14 +195,14 @@ export default function Progressbar(props) {
 
   const maskCord = trailWidth > strokeWidth ? -trailWidth / 2 : -strokeWidth / 2;
 
-  const Gradiant = options => {
+  const Gradiant = forwardRef((options, ref) => {
     return (
-      <linearGradient id={options.id + svgId} x='0%' x2='0%' y1='0%' y2='100%'>
+      <linearGradient ref={ref} id={options.id + svgId} x='0%' x2='0%' y1='0%' y2='100%'>
         <stop offset='0%' stopColor={options.stop1} />
         <stop offset='90%' stopColor={options.stop2} />
       </linearGradient>
     );
-  };
+  });
 
   const [isFirstMount, setIsFirstMount] = useState(true);
 
@@ -208,11 +214,17 @@ export default function Progressbar(props) {
       <svg width={size} height={size} viewBox={viewBoxExpand} fill='none' xmlns='http://www.w3.org/2000/svg'>
         {/* background gradiant */}
         {typeof backgroundColor === 'object' ? (
-          <Gradiant id='react-js-progrssBar-background' stop1={backgroundColor[0]} stop2={backgroundColor[1]} />
+          <Gradiant
+            ref={backgroundColorGradiantRef}
+            id='react-js-progrssBar-background'
+            stop1={backgroundColor[0]}
+            stop2={backgroundColor[1]}
+          />
         ) : null}
         {/* background */}
         {backgroundColor !== 'none' ? (
           <circle
+            ref={backgroundColorRef}
             cx='100'
             cy='100'
             r={R - strokeWidth / 2 + 0.5}
@@ -223,13 +235,13 @@ export default function Progressbar(props) {
         ) : null}
         {/* trail gradiant */}
         {typeof trailColor === 'object' ? (
-          <Gradiant id='react-js-progrssBar-trail' stop1={trailColor[0]} stop2={trailColor[1]} />
+          <Gradiant ref={trailGradiantRef} id='react-js-progrssBar-trail' stop1={trailColor[0]} stop2={trailColor[1]} />
         ) : null}
         {/* trail */}
         {trailColor === 'none' || trailWidth === 0 ? null : (
           <path
             d='M170.063 171.353C188.54 153.208 200 127.942 200 100C200 44.7715 155.228 0 100 0C44.7715 0 0 44.7715 0 100C0 127.942 11.4604 153.208 29.9371 171.353'
-            ref={pathRef}
+            ref={trailRef}
             strokeWidth={trailWidth + 'px'}
             stroke={typeof trailColor === 'object' ? `url(#react-js-progrssBar-trail${svgId})` : trailColor}
             strokeLinecap={strokeLinecap}
@@ -238,7 +250,7 @@ export default function Progressbar(props) {
         )}
         {/* path gradiant */}
         {typeof strokeColor === 'object' ? (
-          <Gradiant id='react-js-progrssBar-path' stop1={strokeColor[0]} stop2={strokeColor[1]} />
+          <Gradiant ref={pathGradiantRef} id='react-js-progrssBar-path' stop1={strokeColor[0]} stop2={strokeColor[1]} />
         ) : null}
         {/* path */}
         <path
@@ -308,11 +320,17 @@ export default function Progressbar(props) {
       <svg width={size} height={size} viewBox={viewBoxExpand} fill='none' xmlns='http://www.w3.org/2000/svg'>
         {/* background gradiant */}
         {typeof backgroundColor === 'object' ? (
-          <Gradiant id='react-js-progrssBar-background' stop1={backgroundColor[0]} stop2={backgroundColor[1]} />
+          <Gradiant
+            ref={backgroundColorGradiantRef}
+            id='react-js-progrssBar-background'
+            stop1={backgroundColor[0]}
+            stop2={backgroundColor[1]}
+          />
         ) : null}
         {/* background */}
         {backgroundColor !== 'none' ? (
           <path
+            ref={backgroundColorRef}
             d={`M${200.5 - hs} 100 C${200.5 - hs} 45 ${155.5 - hs} ${hs - 0.5} 100 ${hs - 0.5} C45 ${hs} ${hs} ${
               45 + hs
             } ${hs} 100`}
@@ -322,13 +340,13 @@ export default function Progressbar(props) {
         ) : null}
         {/* trail gradiant */}
         {typeof trailColor === 'object' ? (
-          <Gradiant id='react-js-progrssBar-trail' stop1={trailColor[0]} stop2={trailColor[1]} />
+          <Gradiant ref={trailGradiantRef} id='react-js-progrssBar-trail' stop1={trailColor[0]} stop2={trailColor[1]} />
         ) : null}
         {/* trail */}
         {trailColor === 'none' || trailWidth === 0 ? null : (
           <path
+            ref={trailRef}
             d='M200 100 C200 45 155 0 100 0 C45 0 0 45 0 100'
-            ref={pathRef}
             strokeWidth={trailWidth + 'px'}
             stroke={typeof trailColor === 'object' ? `url(#react-js-progrssBar-trail${svgId})` : trailColor}
             strokeLinecap={strokeLinecap}
@@ -337,12 +355,11 @@ export default function Progressbar(props) {
         )}
         {/* path gradiant */}
         {typeof strokeColor === 'object' ? (
-          <Gradiant id='react-js-progrssBar-path' stop1={strokeColor[0]} stop2={strokeColor[1]} />
+          <Gradiant ref={pathGradiantRef} id='react-js-progrssBar-path' stop1={strokeColor[0]} stop2={strokeColor[1]} />
         ) : null}
         {/* path */}
         <path
           d='M200 100 C200 45 155 0 100 0 C45 0 0 45 0 100'
-          // d='M199.999 100C200 99.83 200 99.66 200 99.4898C200 44.5431 155.228 0 100 0C44.7715 0 0 44.5431 0 99.4898C0 99.66 0.000429398 99.83 0.00128722 100'
           ref={pathRef}
           strokeWidth={strokeWidth + 'px'}
           stroke={typeof strokeColor === 'object' ? `url(#react-js-progrssBar-path${svgId})` : strokeColor}
@@ -403,11 +420,17 @@ export default function Progressbar(props) {
       <svg width={size} height={size} viewBox={viewBoxExpand} xmlns='http://www.w3.org/2000/svg' fill='none'>
         {/* background gradiant */}
         {typeof backgroundColor === 'object' ? (
-          <Gradiant id='react-js-progrssBar-background' stop1={backgroundColor[0]} stop2={backgroundColor[1]} />
+          <Gradiant
+            ref={backgroundColorGradiantRef}
+            id='react-js-progrssBar-background'
+            stop1={backgroundColor[0]}
+            stop2={backgroundColor[1]}
+          />
         ) : null}
         {/* background */}
         {backgroundColor !== 'none' ? (
           <circle
+            ref={backgroundColorRef}
             cx='100'
             cy='100'
             r={R - strokeWidth / 2 + 0.5}
@@ -418,11 +441,12 @@ export default function Progressbar(props) {
         ) : null}
         {/* trail gradiant */}
         {typeof trailColor === 'object' ? (
-          <Gradiant id='react-js-progrssBar-trail' stop1={trailColor[0]} stop2={trailColor[1]} />
+          <Gradiant ref={trailGradiantRef} id='react-js-progrssBar-trail' stop1={trailColor[0]} stop2={trailColor[1]} />
         ) : null}
         {/* trail */}
         {trailColor === 'none' || trailWidth === 0 ? null : (
           <circle
+            ref={trailRef}
             cx='100'
             cy='100'
             r={R}
@@ -434,7 +458,7 @@ export default function Progressbar(props) {
         )}
         {/* path gradiant */}
         {typeof strokeColor === 'object' ? (
-          <Gradiant id='react-js-progrssBar-path' stop1={strokeColor[0]} stop2={strokeColor[1]} />
+          <Gradiant ref={pathGradiantRef} id='react-js-progrssBar-path' stop1={strokeColor[0]} stop2={strokeColor[1]} />
         ) : null}
         {/* path */}
         <circle
@@ -497,7 +521,44 @@ export default function Progressbar(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.children]);
 
+  // update props when input changes
+  const updateProps = useCallback(() => {
+    // path
+    if (pathRef.current) {
+      pathRef.current.style.stroke = typeof strokeColor === 'object' ? `url(#react-js-progrssBar-path${svgId})` : strokeColor;
+    }
+    if (pathGradiantRef.current && typeof strokeColor === 'object') {
+      pathGradiantRef.current.children[0].style.stopColor = strokeColor[0];
+      pathGradiantRef.current.children[1].style.stopColor = strokeColor[1];
+    }
+    // trail
+    if (trailRef.current) {
+      trailRef.current.style.stroke = typeof trailColor === 'object' ? `url(#react-js-progrssBar-trail${svgId})` : trailColor;
+    }
+    if (trailGradiantRef.current && typeof trailColor === 'object') {
+      trailGradiantRef.current.children[0].style.stopColor = trailColor[0];
+      trailGradiantRef.current.children[1].style.stopColor = trailColor[1];
+    }
+    // background
+    if (backgroundColorRef.current) {
+      backgroundColorRef.current.style.fill =
+        typeof backgroundColor === 'object' ? `url(#react-js-progrssBar-background${svgId})` : backgroundColor;
+    }
+    if (backgroundColorGradiantRef.current && typeof backgroundColor === 'object') {
+      backgroundColorGradiantRef.current.children[0].style.stopColor = backgroundColor[0];
+      backgroundColorGradiantRef.current.children[1].style.stopColor = backgroundColor[1];
+    }
+    // text
+    if (textRef.current) {
+      Object.keys(textStyle).forEach(key => (textRef.current.style[key] = textStyle[key]));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.input]);
+
   useEffect(() => {
+    // update props when input changes without re-rendering
+    if (!isFirstMount) updateProps();
+
     // exit if animate on mount disabled.
     if (isFirstMount && !animation.animateOnMount) {
       setoldProgressValue(calcProgress);
@@ -506,7 +567,7 @@ export default function Progressbar(props) {
       return;
     }
 
-    // exit fi animate on input change disabled.
+    // exit if animate on input change disabled.
     if (!isFirstMount && !animation.animateOnInputChange) {
       setoldProgressValue(calcProgress);
       setoldTextValue(input);
@@ -531,7 +592,7 @@ export default function Progressbar(props) {
       }
     );
 
-    // animate text
+    // animate text if it's not cutom text
     if (!props.customText && props.customText !== '' && animateText) {
       requestNum(
         {
@@ -549,7 +610,8 @@ export default function Progressbar(props) {
           }
         }
       );
-    }
+      // update cutstom text
+    } else if (textRef.current) textRef.current.innerHTML = props.customText;
 
     setIsFirstMount(false);
 
