@@ -158,10 +158,10 @@ export default function App() {
 - Progressbar animation options.
 - **Default Values** `{ duration: 500, delay: 0, ease: 'easeOutBack', animateOnMount: true, animateOnInputChange: true }`
 
-| Option                 | Type               | Description | Default Value |
-| ---------------------- | ------------------ | ----------- | ------------- |
-| `animateOnMount`       | Boolean            | Animate on first render. | true          |
-| `animateOnInputChange` | Boolean            | Animate every time input value changes. | true          |
-| `duration`             | Number             | Progressbar animation duration in ms. | 500 |
-| `delay`                | Number             | Progressbar animation delay in ms. | 0 |
-| `ease`                 | String \| Function | Progressbar animation transition timing function. <br /> Easing functions specify the rate of change of the number over time. <br /> Avaliable Easing functions `"linear", "easeInSine", "easeOutSine", "easeInOutSine", "easeInQuad", "easeOutQuad", "easeInOutQuad", "easeInCubic", "easeOutCubic", "easeInOutCubic", "easeInQuart", "easeOutQuart", "easeInOutQuart", "easeInQuint", "easeOutQuint", "easeInOutQuint", "easeInExpo", "easeOutExpo", "easeInOutExpo", "easeInCirc", "easeOutCirc", "easeInOutCirc", "easeInBack", "easeOutBack", "easeInOutBack", "easeInElastic", "easeOutElastic", "easeInOutElastic", "easeInBounce", "easeOutBounce", "easeInOutBounce"`. <br /> If you want to provide your own timing-function make sure that the function takes one parameter and returns one value. | 'easeOutBack' |
+| Option                 | Type               | Description                                              | Default Value |
+| ---------------------- | ------------------ | -------------------------------------------------------- | ------------- |
+| `animateOnMount`       | Boolean            | Animate on first render.                                 | true          |
+| `animateOnInputChange` | Boolean            | Animate every time input value changes.                  | true          |
+| `duration`             | Number             | Progressbar animation duration in ms.                    | 500           |
+| `delay`                | Number             | Progressbar animation delay in ms.                       | 0             |
+| `ease`                 | String \| Function | Check [easings.net](https://easings.net/) to learn more. | 'easeOutBack' |

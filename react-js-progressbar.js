@@ -33,7 +33,12 @@ function Progressbar(props) {
   var _props$size, _props$clockwise, _props$dashed, _props$dashesSize, _props$dashesGap, _props$pathWidth, _props$trailWidth, _props$customText, _props$textPosition$x, _props$textPosition, _props$textPosition$y, _props$textPosition2, _props$animateText, _props$animation$dura, _props$animation, _props$animation$dela, _props$animation2, _props$animation3, _props$animateOnMount, _props$animateOnInput, _strokeShadow$split;
 
   const pathRef = (0, _react.useRef)();
+  const pathGradiantRef = (0, _react.useRef)();
   const textRef = (0, _react.useRef)();
+  const trailRef = (0, _react.useRef)();
+  const trailGradiantRef = (0, _react.useRef)();
+  const backgroundColorRef = (0, _react.useRef)();
+  const backgroundColorGradiantRef = (0, _react.useRef)();
   const [oldProgressValue, setoldProgressValue] = (0, _react.useState)(null);
   const [oldTextValue, setoldTextValue] = (0, _react.useState)(null);
   const [svgId] = (0, _react.useState)(Math.random() * 1000);
@@ -94,7 +99,7 @@ function Progressbar(props) {
     if (!new Set(['butt', 'round', 'square', 'none']).has(strokeLinecap)) console.error('react-js-ProgressBar: props.pathLinecap has invalid value.');
     if (typeof strokeShadow !== 'string') console.error('react-js-ProgressBar: props.pathShadow has invalid value.');
     if (typeof trailWidth !== 'number' || trailWidth < 0) console.error('react-js-ProgressBar: props.trailWidth has invalid value.');
-    if (typeof trailColor !== 'string') console.error('react-js-ProgressBar: props.trailColor has invalid value.');
+    if (typeof trailColor !== 'string' && typeof trailColor !== 'object') console.error('react-js-ProgressBar: props.trailColor has invalid value.');
     if (typeof backgroundColor !== 'string' && typeof backgroundColor !== 'object') console.error('react-js-ProgressBar: props.backgroundColor has invalid value.');
     if (typeof textPositionX !== 'number' && typeof textPositionX !== 'string') console.error('react-js-ProgressBar: props.textPosition.x has invalid value.');
     if (typeof textPositionY !== 'number' && typeof textPositionY !== 'string') console.error('react-js-ProgressBar: props.textPosition.y has invalid value.');
@@ -109,7 +114,7 @@ function Progressbar(props) {
     if (typeof animation !== 'object') console.error('react-js-ProgressBar: props.animation has invalid value.');
   };
 
-  checkTypes();
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') checkTypes();
   const R = 100;
   const circumference = type === 'full circle' ? 2 * Math.PI * R : type === 'arc' ? 2 * Math.PI * 100 / 2 : type === 'semi circle' ? 2 * Math.PI * R / 1.329 : 0;
   const calcProgress = (circumference - input * circumference / 100) * (clockwise ? 1 : -1);
@@ -117,9 +122,9 @@ function Progressbar(props) {
   const trailShadowBlur = Math.abs(pathShadowBlur - (trailWidth - strokeWidth));
   const viewBoxExpand = trailWidth > strokeWidth ? "".concat(-(trailWidth / 2 + trailShadowBlur), " ").concat(trailWidth / 2 + trailShadowBlur, " ").concat(200 + trailWidth + trailShadowBlur, " ").concat(200 + trailWidth + trailShadowBlur) : "".concat(-(strokeWidth / 2 + pathShadowBlur), " ").concat(strokeWidth / 2 + pathShadowBlur, " ").concat(200 + strokeWidth + pathShadowBlur, " ").concat(200 + strokeWidth + pathShadowBlur);
   const maskCord = trailWidth > strokeWidth ? -trailWidth / 2 : -strokeWidth / 2;
-
-  const Gradiant = options => {
+  const Gradiant = /*#__PURE__*/(0, _react.forwardRef)((options, ref) => {
     return /*#__PURE__*/_react.default.createElement("linearGradient", {
+      ref: ref,
       id: options.id + svgId,
       x: "0%",
       x2: "0%",
@@ -132,8 +137,7 @@ function Progressbar(props) {
       offset: "90%",
       stopColor: options.stop2
     }));
-  };
-
+  });
   const [isFirstMount, setIsFirstMount] = (0, _react.useState)(true);
   const SemiCircle = (0, _react.useCallback)(() => {
     const translateY = trailWidth > strokeWidth ? trailWidth + trailShadowBlur : strokeWidth + pathShadowBlur;
@@ -145,10 +149,12 @@ function Progressbar(props) {
       fill: "none",
       xmlns: "http://www.w3.org/2000/svg"
     }, typeof backgroundColor === 'object' ? /*#__PURE__*/_react.default.createElement(Gradiant, {
+      ref: backgroundColorGradiantRef,
       id: "react-js-progrssBar-background",
       stop1: backgroundColor[0],
       stop2: backgroundColor[1]
     }) : null, backgroundColor !== 'none' ? /*#__PURE__*/_react.default.createElement("circle", {
+      ref: backgroundColorRef,
       cx: "100",
       cy: "100",
       r: R - strokeWidth / 2 + 0.5,
@@ -158,12 +164,13 @@ function Progressbar(props) {
         transformOrigin: 'center'
       }
     }) : null, typeof trailColor === 'object' ? /*#__PURE__*/_react.default.createElement(Gradiant, {
+      ref: trailGradiantRef,
       id: "react-js-progrssBar-trail",
       stop1: trailColor[0],
       stop2: trailColor[1]
     }) : null, trailColor === 'none' || trailWidth === 0 ? null : /*#__PURE__*/_react.default.createElement("path", {
       d: "M170.063 171.353C188.54 153.208 200 127.942 200 100C200 44.7715 155.228 0 100 0C44.7715 0 0 44.7715 0 100C0 127.942 11.4604 153.208 29.9371 171.353",
-      ref: pathRef,
+      ref: trailRef,
       strokeWidth: trailWidth + 'px',
       stroke: typeof trailColor === 'object' ? "url(#react-js-progrssBar-trail".concat(svgId, ")") : trailColor,
       strokeLinecap: strokeLinecap,
@@ -171,6 +178,7 @@ function Progressbar(props) {
         transform: "translateY(".concat(translateY, "px)")
       }
     }), typeof strokeColor === 'object' ? /*#__PURE__*/_react.default.createElement(Gradiant, {
+      ref: pathGradiantRef,
       id: "react-js-progrssBar-path",
       stop1: strokeColor[0],
       stop2: strokeColor[1]
@@ -224,22 +232,25 @@ function Progressbar(props) {
       fill: "none",
       xmlns: "http://www.w3.org/2000/svg"
     }, typeof backgroundColor === 'object' ? /*#__PURE__*/_react.default.createElement(Gradiant, {
+      ref: backgroundColorGradiantRef,
       id: "react-js-progrssBar-background",
       stop1: backgroundColor[0],
       stop2: backgroundColor[1]
     }) : null, backgroundColor !== 'none' ? /*#__PURE__*/_react.default.createElement("path", {
+      ref: backgroundColorRef,
       d: "M".concat(200.5 - hs, " 100 C").concat(200.5 - hs, " 45 ").concat(155.5 - hs, " ").concat(hs - 0.5, " 100 ").concat(hs - 0.5, " C45 ").concat(hs, " ").concat(hs, " ").concat(45 + hs, " ").concat(hs, " 100"),
       fill: typeof backgroundColor === 'object' ? "url(#react-js-progrssBar-background".concat(svgId, ")") : backgroundColor,
       style: {
         transform: "translateY(".concat(translateY, "px)")
       }
     }) : null, typeof trailColor === 'object' ? /*#__PURE__*/_react.default.createElement(Gradiant, {
+      ref: trailGradiantRef,
       id: "react-js-progrssBar-trail",
       stop1: trailColor[0],
       stop2: trailColor[1]
     }) : null, trailColor === 'none' || trailWidth === 0 ? null : /*#__PURE__*/_react.default.createElement("path", {
+      ref: trailRef,
       d: "M200 100 C200 45 155 0 100 0 C45 0 0 45 0 100",
-      ref: pathRef,
       strokeWidth: trailWidth + 'px',
       stroke: typeof trailColor === 'object' ? "url(#react-js-progrssBar-trail".concat(svgId, ")") : trailColor,
       strokeLinecap: strokeLinecap,
@@ -247,12 +258,12 @@ function Progressbar(props) {
         transform: "translateY(".concat(translateY, "px)")
       }
     }), typeof strokeColor === 'object' ? /*#__PURE__*/_react.default.createElement(Gradiant, {
+      ref: pathGradiantRef,
       id: "react-js-progrssBar-path",
       stop1: strokeColor[0],
       stop2: strokeColor[1]
     }) : null, /*#__PURE__*/_react.default.createElement("path", {
-      d: "M200 100 C200 45 155 0 100 0 C45 0 0 45 0 100" // d='M199.999 100C200 99.83 200 99.66 200 99.4898C200 44.5431 155.228 0 100 0C44.7715 0 0 44.5431 0 99.4898C0 99.66 0.000429398 99.83 0.00128722 100'
-      ,
+      d: "M200 100 C200 45 155 0 100 0 C45 0 0 45 0 100",
       ref: pathRef,
       strokeWidth: strokeWidth + 'px',
       stroke: typeof strokeColor === 'object' ? "url(#react-js-progrssBar-path".concat(svgId, ")") : strokeColor,
@@ -298,10 +309,12 @@ function Progressbar(props) {
       xmlns: "http://www.w3.org/2000/svg",
       fill: "none"
     }, typeof backgroundColor === 'object' ? /*#__PURE__*/_react.default.createElement(Gradiant, {
+      ref: backgroundColorGradiantRef,
       id: "react-js-progrssBar-background",
       stop1: backgroundColor[0],
       stop2: backgroundColor[1]
     }) : null, backgroundColor !== 'none' ? /*#__PURE__*/_react.default.createElement("circle", {
+      ref: backgroundColorRef,
       cx: "100",
       cy: "100",
       r: R - strokeWidth / 2 + 0.5,
@@ -311,10 +324,12 @@ function Progressbar(props) {
         transformOrigin: 'center'
       }
     }) : null, typeof trailColor === 'object' ? /*#__PURE__*/_react.default.createElement(Gradiant, {
+      ref: trailGradiantRef,
       id: "react-js-progrssBar-trail",
       stop1: trailColor[0],
       stop2: trailColor[1]
     }) : null, trailColor === 'none' || trailWidth === 0 ? null : /*#__PURE__*/_react.default.createElement("circle", {
+      ref: trailRef,
       cx: "100",
       cy: "100",
       r: R,
@@ -325,6 +340,7 @@ function Progressbar(props) {
         transformOrigin: 'center'
       }
     }), typeof strokeColor === 'object' ? /*#__PURE__*/_react.default.createElement(Gradiant, {
+      ref: pathGradiantRef,
       id: "react-js-progrssBar-path",
       stop1: strokeColor[0],
       stop2: strokeColor[1]
@@ -371,15 +387,55 @@ function Progressbar(props) {
       width: "100%",
       height: "100%"
     }, props.children) : null); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.children]);
+  }, [props.children]); // update props when input changes
+
+  const updateProps = (0, _react.useCallback)(() => {
+    // path
+    if (pathRef.current) {
+      pathRef.current.style.stroke = typeof strokeColor === 'object' ? "url(#react-js-progrssBar-path".concat(svgId, ")") : strokeColor;
+    }
+
+    if (pathGradiantRef.current && typeof strokeColor === 'object') {
+      pathGradiantRef.current.children[0].style.stopColor = strokeColor[0];
+      pathGradiantRef.current.children[1].style.stopColor = strokeColor[1];
+    } // trail
+
+
+    if (trailRef.current) {
+      trailRef.current.style.stroke = typeof trailColor === 'object' ? "url(#react-js-progrssBar-trail".concat(svgId, ")") : trailColor;
+    }
+
+    if (trailGradiantRef.current && typeof trailColor === 'object') {
+      trailGradiantRef.current.children[0].style.stopColor = trailColor[0];
+      trailGradiantRef.current.children[1].style.stopColor = trailColor[1];
+    } // background
+
+
+    if (backgroundColorRef.current) {
+      backgroundColorRef.current.style.fill = typeof backgroundColor === 'object' ? "url(#react-js-progrssBar-background".concat(svgId, ")") : backgroundColor;
+    }
+
+    if (backgroundColorGradiantRef.current && typeof backgroundColor === 'object') {
+      backgroundColorGradiantRef.current.children[0].style.stopColor = backgroundColor[0];
+      backgroundColorGradiantRef.current.children[1].style.stopColor = backgroundColor[1];
+    } // text
+
+
+    if (textRef.current) {
+      Object.keys(textStyle).forEach(key => textRef.current.style[key] = textStyle[key]);
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  }, [props.input]);
   (0, _react.useEffect)(() => {
-    // exit if animate on mount disabled.
+    // update props when input changes without re-rendering
+    if (!isFirstMount) updateProps(); // exit if animate on mount disabled.
+
     if (isFirstMount && !animation.animateOnMount) {
       setoldProgressValue(calcProgress);
       setoldTextValue(input);
       setIsFirstMount(false);
       return;
-    } // exit fi animate on input change disabled.
+    } // exit if animate on input change disabled.
 
 
     if (!isFirstMount && !animation.animateOnInputChange) {
@@ -401,7 +457,7 @@ function Progressbar(props) {
         pathRef.current.style.strokeDashoffset = x + 'px';
         if (x === calcProgress) setoldProgressValue(calcProgress);
       }
-    }); // animate text
+    }); // animate text if it's not cutom text
 
     if (!props.customText && props.customText !== '' && animateText) {
       (0, _requestAnimationNumber.requestNum)({
@@ -416,8 +472,8 @@ function Progressbar(props) {
           textRef.current.innerHTML = t.toFixed(0) + '%';
           if (t === input) setoldTextValue(input);
         }
-      });
-    }
+      }); // update cutstom text
+    } else if (textRef.current) textRef.current.innerHTML = props.customText;
 
     setIsFirstMount(false); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.input]);
