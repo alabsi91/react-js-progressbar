@@ -35,7 +35,7 @@ export default function Progressbar(props) {
     ? `drop-shadow(${props.pathShadow})`
     : props.pathShadow === 'none'
     ? 'none'
-    : 'drop-shadow(0px 0px 8px #00000080)';
+    : 'drop-shadow(0px 0px 2px #00000080)';
 
   const trailWidth = props.trailWidth ?? 5;
   const trailColor = props.trailColor || 'lightgray';

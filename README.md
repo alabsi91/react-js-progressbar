@@ -89,7 +89,7 @@ export default function App() {
 - **Syntax** `"offset-x offset-y blur-radius color"`
 - Doesn't works for `'arc'` shape and when `dashed` is enabled.
 - Use `'none'` to remove the shadow.
-- **Default Value** `0px 0px 8px #00000080`
+- **Default Value** `0px 0px 2px #00000080`
 
 ### dashed : _[Boolean] [optional]_
 
