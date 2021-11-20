@@ -55,7 +55,7 @@ function Progressbar(props) {
   const strokeColor = props.pathColor || ['#f4314a', '#fa5813'];
   const strokeLinecap = props.pathLinecap || (type === 'arc' ? 'none' : 'round'); // 'butt' | 'round' | 'square' | 'none'
 
-  const strokeShadow = dashed ? 'none' : props.pathShadow && props.pathShadow !== 'none' ? "drop-shadow(".concat(props.pathShadow, ")") : props.pathShadow === 'none' ? 'none' : 'drop-shadow(0px 0px 8px #00000080)';
+  const strokeShadow = dashed ? 'none' : props.pathShadow && props.pathShadow !== 'none' ? "drop-shadow(".concat(props.pathShadow, ")") : props.pathShadow === 'none' ? 'none' : 'drop-shadow(0px 0px 2px #00000080)';
   const trailWidth = (_props$trailWidth = props.trailWidth) !== null && _props$trailWidth !== void 0 ? _props$trailWidth : 5;
   const trailColor = props.trailColor || 'lightgray';
   const backgroundColor = props.backgroundColor || 'none';
